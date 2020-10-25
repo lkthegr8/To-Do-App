@@ -1,24 +1,39 @@
 const todos=[{
-    text:"six of crows",
+    text:"Six Of Crows",
     completed:false
 },{
     text:"When only love remains",
     completed:true
 },{
-    text:"defient queen",
+    text:"Defient Queen",
     completed:false
+},{
+    text:"Ruthless King",
+    completed:true
 }]
 
 const filters={
-    searchText:""
+    searchText:"",
+    hideCompleted:false
 }
 
 
 // eposide 57 render function
 const renderTodos = function(todos,filter){
-    const filteredTodos = todos.filter(function(todo){
+    let filteredTodos = todos.filter(function(todo){
         return todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
     })
+
+// eposide 59 implementing the hide completed todos by refiltering the filteredTodos
+    filteredTodos=filteredTodos.filter(function(todo){
+        if(filter.hideCompleted){
+            return !todo.completed
+        }else{
+            return true
+        }
+    })
+
+
 // shifting this function (used to get how many todos left) inside to combine it with filter
     const incompleteTodos=filteredTodos.filter(function(todo){
         return !todo.completed
@@ -64,4 +79,10 @@ document.querySelector("#new-todo").addEventListener("submit",function(e){
     renderTodos(todos,filters)
     // empty the input text
     e.target.elements.text.value=""
+})
+
+// eposide 59 check box and its event and filter(hide completed)
+document.querySelector("#hide-completed").addEventListener("change",function(e){
+    filters.hideCompleted=e.target.checked
+    renderTodos(todos,filters)
 })
