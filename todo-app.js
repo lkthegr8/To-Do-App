@@ -32,3 +32,7 @@ document.querySelector("#add-todo").addEventListener('click',function(e){
     console.log("add a new todo...")
 })
 
+// eposide 55 listen for the search box text change
+document.querySelector("#search-todos").addEventListener("input",function(e){
+    console.log(e.target.value)
+})
