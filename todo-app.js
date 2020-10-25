@@ -27,7 +27,7 @@ todos.forEach(function(todo){
 
 
 
-// creating a new element eposide 52
-const paragraph=document.createElement("p")
-paragraph.textContent="This is a new element from javascript"
-document.querySelector("body").appendChild(paragraph)
+// eposide 53 listen for new todo creation
+document.querySelector("button").addEventListener('click',function(e){
+    console.log("add a new todo...")
+})
