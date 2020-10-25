@@ -27,7 +27,8 @@ todos.forEach(function(todo){
 
 
 
-// eposide 53 listen for new todo creation
-document.querySelector("button").addEventListener('click',function(e){
+// eposide 54 select the dom element by class of id
+document.querySelector("#add-todo").addEventListener('click',function(e){
     console.log("add a new todo...")
 })
+
