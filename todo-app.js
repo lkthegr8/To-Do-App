@@ -9,21 +9,43 @@ const todos=[{
     completed:false
 }]
 
+const filters={
+    searchText:""
+}
 
 
-const incompleteTodos=todos.filter(function(todo){
-    return !todo.completed
-})
-const summary=document.createElement("h2")
-summary.textContent=`you have ${incompleteTodos.length} todos left`
-document.querySelector("body").appendChild(summary)
+// eposide 57 render function
+const renderTodos = function(todos,filter){
+    const filteredTodos = todos.filter(function(todo){
+        return todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
+    })
+// shifting this function (used to get how many todos left) inside to combine it with filter
+    const incompleteTodos=filteredTodos.filter(function(todo){
+        return !todo.completed
+    })
+// clear off the previous data inside the div for new data 
+document.querySelector("#todos").innerHTML=""
 
+// shifting this function (used to show how many todos left inside html) inside to combine it with filter
+    const summary = document.createElement("h2")
+    summary.textContent = `you have ${incompleteTodos.length} todos left`
+    document.querySelector("#todos").appendChild(summary)
+
+// displaying the filtered todos in the div
 // foreach loop
-todos.forEach(function(todo){
+filteredTodos.forEach(function(todo){
     const p=document.createElement("p")
     p.textContent=todo.text
-    document.querySelector("body").appendChild(p)
+    document.querySelector("#todos").appendChild(p)
 })
+
+}
+
+// initial rendering that takes place when program starts(by calling the renderTodos function)
+renderTodos(todos,filters)
+
+
+
 
 
 
@@ -33,6 +55,9 @@ document.querySelector("#add-todo").addEventListener('click',function(e){
 })
 
 // eposide 55 listen for the search box text change
+// eposide 57 rendering the todo filters
 document.querySelector("#search-todos").addEventListener("input",function(e){
-    console.log(e.target.value)
+    filters.searchText=e.target.value
+// re rendering the todos filters
+    renderTodos(todos, filters)
 })
