@@ -1,7 +1,33 @@
-const para=document.querySelectorAll("p")
+const todos=[{
+    text:"six of crows",
+    completed:false
+},{
+    text:"When only love remains",
+    completed:true
+},{
+    text:"defient queen",
+    completed:false
+}]
 
-para.forEach(function(p){
-    if(p.textContent.includes("the")){
-        p.remove()
-    }
+
+
+const incompleteTodos=todos.filter(function(todo){
+    return !todo.completed
 })
+const summary=document.createElement("h2")
+summary.textContent=`you have ${incompleteTodos.length} todos left`
+document.querySelector("body").appendChild(summary)
+
+// foreach loop
+todos.forEach(function(todo){
+    const p=document.createElement("p")
+    p.textContent=todo.text
+    document.querySelector("body").appendChild(p)
+})
+
+
+
+// creating a new element eposide 52
+const paragraph=document.createElement("p")
+paragraph.textContent="This is a new element from javascript"
+document.querySelector("body").appendChild(paragraph)
