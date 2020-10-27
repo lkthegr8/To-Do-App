@@ -66,6 +66,18 @@ const removeTodos = function(id){
 }
 
 
+// function to toggle the completed value
+const toggleTodo = function(id){
+    const todo=todos.find(function(todo){
+        return id === todo.id
+    })
+
+    if (todo !== undefined){
+        todo.completed = !todo.completed
+    }
+}
+
+
 // get dom elements for an individual note
 const generateTodoDOM = function(todo){
     const todoEl = document.createElement('div')
@@ -75,7 +87,15 @@ const generateTodoDOM = function(todo){
 
     // set input to check box
     checkbox.setAttribute('type','checkbox')
+    checkbox.checked = todo.completed
     todoEl.appendChild(checkbox)
+
+    // event for check box and alter local storage accordingly
+    checkbox.addEventListener("change",function(){
+        toggleTodo(todo.id)
+        saveTodos(todos)
+        renderTodos(todos,filters)
+    })
 
     // set up the todo text
     todoText.textContent = todo.text
