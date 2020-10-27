@@ -1,56 +1,9 @@
 // eposide 63 local storage deleted dummy data 
-let todos=[]
+let todos = getSavedTodos()
 
 const filters={
     searchText:"",
     hideCompleted:false
-}
-
-
-// getting data from local storage
-const todosJSON=localStorage.getItem("todos")
-
-// check if local storage is already set or not
-if(todosJSON != null){
-    todos=JSON.parse(todosJSON)
-}
-
-// eposide 57 render function
-const renderTodos = function(todos,filter){
-    let filteredTodos = todos.filter(function(todo){
-        return todo.text.toLowerCase().includes(filter.searchText.toLowerCase())
-    })
-
-// eposide 59 implementing the hide completed todos by refiltering the filteredTodos
-    filteredTodos=filteredTodos.filter(function(todo){
-        if(filter.hideCompleted){
-            return !todo.completed
-        }else{
-            return true
-        }
-    })
-
-
-// shifting this function (used to get how many todos left) inside to combine it with filter
-    const incompleteTodos=filteredTodos.filter(function(todo){
-        return !todo.completed
-    })
-// clear off the previous data inside the div for new data 
-document.querySelector("#todos").innerHTML=""
-
-// shifting this function (used to show how many todos left inside html) inside to combine it with filter
-    const summary = document.createElement("h2")
-    summary.textContent = `you have ${incompleteTodos.length} todos left`
-    document.querySelector("#todos").appendChild(summary)
-
-// displaying the filtered todos in the div
-// foreach loop
-filteredTodos.forEach(function(todo){
-    const p=document.createElement("p")
-    p.textContent=todo.text
-    document.querySelector("#todos").appendChild(p)
-})
-
 }
 
 // initial rendering that takes place when program starts(by calling the renderTodos function)
@@ -72,8 +25,8 @@ document.querySelector("#new-todo").addEventListener("submit",function(e){
         text : e.target.elements.text.value,
         completed : false
     })
-    // storing the todos in local storage
-    localStorage.setItem("todos",JSON.stringify(todos))
+
+    saveTodos(todos)
     // rerender the todos after new input to the todo array
     renderTodos(todos,filters)
     // empty the input text
