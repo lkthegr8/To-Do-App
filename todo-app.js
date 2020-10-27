@@ -1,22 +1,19 @@
-const todos=[{
-    text:"Six Of Crows",
-    completed:false
-},{
-    text:"When only love remains",
-    completed:true
-},{
-    text:"Defient Queen",
-    completed:false
-},{
-    text:"Ruthless King",
-    completed:true
-}]
+// eposide 63 local storage deleted dummy data 
+let todos=[]
 
 const filters={
     searchText:"",
     hideCompleted:false
 }
 
+
+// getting data from local storage
+const todosJSON=localStorage.getItem("todos")
+
+// check if local storage is already set or not
+if(todosJSON != null){
+    todos=JSON.parse(todosJSON)
+}
 
 // eposide 57 render function
 const renderTodos = function(todos,filter){
@@ -75,6 +72,8 @@ document.querySelector("#new-todo").addEventListener("submit",function(e){
         text : e.target.elements.text.value,
         completed : false
     })
+    // storing the todos in local storage
+    localStorage.setItem("todos",JSON.stringify(todos))
     // rerender the todos after new input to the todo array
     renderTodos(todos,filters)
     // empty the input text
