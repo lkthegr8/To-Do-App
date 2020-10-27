@@ -53,6 +53,18 @@ const renderTodos = function (todos, filter) {
 
 }
 
+// function to remove a todo
+const removeTodos = function(id){
+    // check if sent uuid is available
+    const todoIndex = todos.findIndex(function(todo){
+        return todo.id == id
+    })
+    // remove the todo if uuid is available
+    if(todoIndex > -1){
+        todos.splice(todoIndex,1)
+    }
+}
+
 
 // get dom elements for an individual note
 const generateTodoDOM = function(todo){
@@ -72,6 +84,13 @@ const generateTodoDOM = function(todo){
     // set up the remove button
     removeButton.textContent = "x"
     todoEl.appendChild(removeButton)
+
+    // add event listener to button to delete the todos
+    removeButton.addEventListener("click",function(){
+        removeTodos(todo.id)
+        saveTodos(todos)
+        renderTodos(todos,filters)
+    })
 
     return todoEl
 }
