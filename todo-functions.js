@@ -3,8 +3,13 @@ const getSavedTodos = ()=>{
     // getting data from local storage
     const todosJSON = localStorage.getItem("todos")
 
-    // check if local storage is already set or not
-    return todosJSON ? JSON.parse(todosJSON) : []
+    // using the try catch if the returned data from local storage is no valid
+    try {
+        // check if local storage is already set or not
+        return todosJSON ? JSON.parse(todosJSON) : []
+    } catch (error) {
+       return [] 
+    }
 
 }
 
