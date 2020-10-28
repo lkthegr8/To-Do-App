@@ -12,14 +12,14 @@ renderTodos(todos,filters)
 
 // eposide 55 listen for the search box text change
 // eposide 57 rendering the todo filters
-document.querySelector("#search-todos").addEventListener("input",function(e){
+document.querySelector("#search-todos").addEventListener("input",(e)=>{
     filters.searchText=e.target.value
 // re rendering the todos filters
     renderTodos(todos, filters)
 })
 
 // eposide 58 working with forms (hanldle the submit event to add a new todo)
-document.querySelector("#new-todo").addEventListener("submit",function(e){
+document.querySelector("#new-todo").addEventListener("submit",(e)=>{
     e.preventDefault()
     todos.push({
         id : uuidv4(),
@@ -35,7 +35,7 @@ document.querySelector("#new-todo").addEventListener("submit",function(e){
 })
 
 // eposide 59 check box and its event and filter(hide completed)
-document.querySelector("#hide-completed").addEventListener("change",function(e){
+document.querySelector("#hide-completed").addEventListener("change",(e)=>{
     filters.hideCompleted=e.target.checked
     renderTodos(todos,filters)
 })
