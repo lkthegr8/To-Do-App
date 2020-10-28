@@ -1,3 +1,5 @@
+'use strict'
+
 // eposide 63 local storage deleted dummy data 
 let todos = getSavedTodos()
 

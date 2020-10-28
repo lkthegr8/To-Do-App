@@ -1,3 +1,5 @@
+'use strict'
+
 // fetching existing data from local storage
 const getSavedTodos = ()=>{
     // getting data from local storage
