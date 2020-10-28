@@ -4,11 +4,8 @@ const getSavedTodos = ()=>{
     const todosJSON = localStorage.getItem("todos")
 
     // check if local storage is already set or not
-    if (todosJSON != null) {
-        return JSON.parse(todosJSON)
-    }else{
-        return []
-    }
+    return todosJSON != null?JSON.parse(todosJSON): []
+
 }
 
 // save todos to local storage
